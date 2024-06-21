@@ -19,12 +19,12 @@ public class OrderDetail {
     private Double discount;
 
     @ManyToOne
-    @MapsId("productId")
+    @MapsId("productid")
     @JoinColumn(name = "productid")
     private Product product;
 
     @ManyToOne
-    @MapsId("orderId")
+    @MapsId("orderid")
     @JoinColumn(name = "orderid")
     private Order order;
 
