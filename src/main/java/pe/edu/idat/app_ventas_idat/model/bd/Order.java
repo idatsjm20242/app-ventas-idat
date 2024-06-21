@@ -24,9 +24,7 @@ public class Order {
     private String shipcity;
     private String shipregion;
     private String shippostalcode;
-    private String shipcontry;
-
-
-
+    //@Column(name = "shipcontry")
+    private String shipcountry;
 
 }
