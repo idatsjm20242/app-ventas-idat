@@ -1,9 +1,6 @@
 package pe.edu.idat.app_ventas_idat.model.bd;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import pe.edu.idat.app_ventas_idat.model.bd.pk.ProductOrderId;
@@ -20,4 +17,15 @@ public class OrderDetail {
     private Double unitprice;
     private Integer quantity;
     private Double discount;
+
+    @ManyToOne
+    @MapsId("productId")
+    @JoinColumn(name = "productid")
+    private Product product;
+
+    @ManyToOne
+    @MapsId("orderId")
+    @JoinColumn(name = "orderid")
+    private Order order;
+
 }
