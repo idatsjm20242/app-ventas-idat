@@ -1,5 +1,6 @@
 package pe.edu.idat.app_ventas_idat.model.bd;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,6 +39,7 @@ public class Order {
     private Employee employee;
     @OneToMany(mappedBy = "order",
     cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<OrderDetail> product = new HashSet<>();
 
 }

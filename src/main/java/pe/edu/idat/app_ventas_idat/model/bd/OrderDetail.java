@@ -1,5 +1,6 @@
 package pe.edu.idat.app_ventas_idat.model.bd;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,11 +22,13 @@ public class OrderDetail {
     @ManyToOne
     @MapsId("productid")
     @JoinColumn(name = "productid")
+    @JsonBackReference
     private Product product;
 
     @ManyToOne
     @MapsId("orderid")
     @JoinColumn(name = "orderid")
+    @JsonBackReference
     private Order order;
 
 }
