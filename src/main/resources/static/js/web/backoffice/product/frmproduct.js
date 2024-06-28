@@ -6,6 +6,7 @@ $(document).on("click", "#btnagregar", function(){
     $("#hddcodprod").val("0");
     $("#cbocategory").empty();
     $("#cbosupplier").empty();
+    listarCateProv(0,0)
     $("#modalproduct").modal("show");
 })
 $(document).on("click", ".btnactualizar", function(){
@@ -20,5 +21,21 @@ $(document).on("click", ".btnactualizar", function(){
     $("#hddcodprod").val($(this).attr("data-prodcod"));
     $("#cbocategory").empty();
     $("#cbosupplier").empty();
+    listarCateProv(0,0)
     $("#modalproduct").modal("show");
-})
+});
+
+function listarCateProv(idcate, idprov){
+    $.ajax({
+    type: "GET",
+    url: "/category/listar",
+    dataType: "json",
+    success: function(resultado){
+        $.each(resultado, function(index, value){
+            $("#cbocategory").append(
+            `<option value="${value.categoryid}">${value.categoryname}</option>`
+            )
+        })
+    }
+    })
+}
