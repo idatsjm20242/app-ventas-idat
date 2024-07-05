@@ -35,23 +35,29 @@ public class ProductService implements IProductService {
         return productDtoList;
     }
     @Override
-    public Product guardarProducto(ProductDto product) {
-        Product nuevoProducto = new Product();
-        nuevoProducto.setProductname(product.getProductname());
-        nuevoProducto.setUnitprice(product.getUnitprice());
-        if(product.getProductid() == null){
-            nuevoProducto.setDiscontinued(true);
+    public void guardarProducto(ProductDto product) {
+        if(product.getProductid() > 0){
+            productRepository.actualizarProducto(
+                    product.getProductid(),
+                    product.getProductname(),
+                    product.getUnitprice(),
+                    product.getCategoryid(),
+                    product.getSupplierid(),
+                    product.isDiscontinued()
+            );
         }else {
-            nuevoProducto.setDiscontinued(product.isDiscontinued());
-            nuevoProducto.setProductid(product.getProductid());
+            Product nuevoProducto = new Product();
+            nuevoProducto.setProductname(product.getProductname());
+            nuevoProducto.setUnitprice(product.getUnitprice());
+            nuevoProducto.setDiscontinued(true);
+            Category category = new Category();
+            category.setCategoryid(product.getCategoryid());
+            nuevoProducto.setCategory(category);
+            Supplier supplier = new Supplier();
+            supplier.setSupplierid(product.getSupplierid());
+            nuevoProducto.setSupplier(supplier);
+            productRepository.save(nuevoProducto);
         }
-        Category category = new Category();
-        category.setCategoryid(product.getCategoryid());
-        nuevoProducto.setCategory(category);
-        Supplier supplier = new Supplier();
-        supplier.setSupplierid(product.getSupplierid());
-        nuevoProducto.setSupplier(supplier);
-        return productRepository.save(nuevoProducto);
     }
     @Override
     public Product obtenerProducto(Integer idproducto) {

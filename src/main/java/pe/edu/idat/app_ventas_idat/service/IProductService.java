@@ -8,6 +8,6 @@ import java.util.List;
 public interface IProductService {
 
     List<ProductDto> listarProductos();
-    Product guardarProducto(ProductDto product);
+    void guardarProducto(ProductDto product);
     Product obtenerProducto(Integer idproducto);
 }
