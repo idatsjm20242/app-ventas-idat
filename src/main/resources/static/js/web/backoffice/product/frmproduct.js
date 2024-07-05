@@ -21,7 +21,8 @@ $(document).on("click", ".btnactualizar", function(){
     $("#hddcodprod").val($(this).attr("data-prodcod"));
     $("#cbocategory").empty();
     $("#cbosupplier").empty();
-    listarCateProv(0,0)
+    listarCateProv($(this).attr("data-prodcategory"),
+                    $(this).attr("data-prodsupplier"));
     $("#modalproduct").modal("show");
 });
 
@@ -36,6 +37,8 @@ function listarCateProv(idcate, idprov){
             `<option value="${value.categoryid}">${value.categoryname}</option>`
             )
         });
+        if(idcate > 0)
+            $("#cbocategory").val(idcate);
         $.ajax({
                 type: "GET",
                 url: "/supplier/listar",
@@ -46,7 +49,8 @@ function listarCateProv(idcate, idprov){
                         `<option value="${value.supplierid}">${value.companyname}</option>`
                         )
                     });
-
+                    if(idprov > 0)
+                        $("#cbosupplier").val(idprov)
                 }
                 })
     }
