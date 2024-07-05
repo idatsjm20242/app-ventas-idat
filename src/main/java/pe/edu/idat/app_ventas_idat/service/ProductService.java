@@ -2,7 +2,9 @@ package pe.edu.idat.app_ventas_idat.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pe.edu.idat.app_ventas_idat.model.bd.Category;
 import pe.edu.idat.app_ventas_idat.model.bd.Product;
+import pe.edu.idat.app_ventas_idat.model.bd.Supplier;
 import pe.edu.idat.app_ventas_idat.model.dto.ProductDto;
 import pe.edu.idat.app_ventas_idat.repository.ProductRepository;
 
@@ -34,7 +36,22 @@ public class ProductService implements IProductService {
     }
     @Override
     public Product guardarProducto(ProductDto product) {
-        return productRepository.save(new Product());
+        Product nuevoProducto = new Product();
+        nuevoProducto.setProductname(product.getProductname());
+        nuevoProducto.setUnitprice(product.getUnitprice());
+        if(product.getProductid() == null){
+            nuevoProducto.setDiscontinued(true);
+        }else {
+            nuevoProducto.setDiscontinued(product.isDiscontinued());
+            nuevoProducto.setProductid(product.getProductid());
+        }
+        Category category = new Category();
+        category.setCategoryid(product.getCategoryid());
+        nuevoProducto.setCategory(category);
+        Supplier supplier = new Supplier();
+        supplier.setSupplierid(product.getSupplierid());
+        nuevoProducto.setSupplier(supplier);
+        return productRepository.save(nuevoProducto);
     }
     @Override
     public Product obtenerProducto(Integer idproducto) {
