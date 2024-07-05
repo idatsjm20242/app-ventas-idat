@@ -26,6 +26,26 @@ $(document).on("click", ".btnactualizar", function(){
     $("#modalproduct").modal("show");
 });
 
+$(document).on("click", "#btnguardar", function(){
+    $.ajax({
+        type: "POST",
+        url: "/producto/registrar",
+        contentType: "application/json",
+        data: JSON.stringify({
+            productid: $("#hddcodprod").val(),
+            productname: $("#txtnomproduct").val(),
+            unitprice: $("#txtunitprice").val(),
+            categoryid: $("#cbocategory").val(),
+            supplierid: $("#cbosupplier").val(),
+            discontinued: $("#cbdiscontinued").prop("checked")
+        }),
+        success: function(resultado){
+            alert(resultado.mensaje)
+        }
+    });
+    $("#modalproduct").modal("hide");
+});
+
 function listarCateProv(idcate, idprov){
     $.ajax({
     type: "GET",
@@ -55,6 +75,4 @@ function listarCateProv(idcate, idprov){
                 })
     }
     });
-
-
 }
