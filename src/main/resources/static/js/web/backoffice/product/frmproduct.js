@@ -35,7 +35,22 @@ function listarCateProv(idcate, idprov){
             $("#cbocategory").append(
             `<option value="${value.categoryid}">${value.categoryname}</option>`
             )
-        })
+        });
+        $.ajax({
+                type: "GET",
+                url: "/supplier/listar",
+                dataType: "json",
+                success: function(resultado){
+                    $.each(resultado, function(index, value){
+                        $("#cbosupplier").append(
+                        `<option value="${value.supplierid}">${value.companyname}</option>`
+                        )
+                    });
+
+                }
+                })
     }
-    })
+    });
+
+
 }
