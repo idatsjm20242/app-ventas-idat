@@ -52,7 +52,24 @@ function listarProductos(){
         url: "/producto/listar"
         dataType: "json",
         success: function(resultado){
+            $("#tblproduct > tbody").html("")
+            $.each(resultado, function(index, value){
+                $("#tblproduct > tbody").append("<tr>"+
+                `<td>${value.productid}</td>`+
+                `<td>${value.productname}</td>`+
+                `<td>${value.unitprice}</td>`+
+                `<td>${value.categoryname}</td>`+
+                `<td>${value.companyname}</td>`+
+                `<td><button type="button" class="btn btn-info btnactualizar" `+
+                ` data-prodcod="${value.productid}" `+
+                ` data-prodname="${value.productname}" `+
+                ` data-produnitprice="${value.unitprice}" `+
+                ` data-proddiscontinued="${value.discontinued}" `+
+                ` data-prodcategory="${value.categoryid}" `+
+                ` data-prodsupplier="${value.supplierid}">Actualizar</button></td></tr>`
+                )
 
+            })
         }
     })
 }
