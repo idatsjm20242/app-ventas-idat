@@ -40,6 +40,9 @@ $(document).on("click", "#btnguardar", function(){
             discontinued: $("#cbdiscontinued").prop("checked")
         }),
         success: function(resultado){
+            if(resultado.resultado){
+                listarProductos()
+            }
             alert(resultado.mensaje)
         }
     });
@@ -49,7 +52,7 @@ $(document).on("click", "#btnguardar", function(){
 function listarProductos(){
     $.ajax({
         type: "GET",
-        url: "/producto/listar"
+        url: "/producto/listar",
         dataType: "json",
         success: function(resultado){
             $("#tblproduct > tbody").html("")
