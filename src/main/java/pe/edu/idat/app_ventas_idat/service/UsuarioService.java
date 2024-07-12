@@ -37,16 +37,16 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public List<Usuario> listarUsuario() {
-        return null;
+        return usuarioRepository.findAll();
     }
-
     @Override
     public Usuario obtenerUsuarioxId(Integer id) {
-        return null;
+        return usuarioRepository.findById(id).orElse(null);
     }
-
     @Override
     public void actualizarUsuario(Usuario usuario) {
-
+        usuarioRepository.actualizarUsuario(
+                usuario.getNombres(), usuario.getApellidos(),
+                usuario.getActivo(), usuario.getIdusuario());
     }
 }
