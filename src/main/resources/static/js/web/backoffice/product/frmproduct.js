@@ -46,6 +46,18 @@ $(document).on("click", "#btnguardar", function(){
     $("#modalproduct").modal("hide");
 });
 
+function listarProductos(){
+    $.ajax({
+        type: "GET",
+        url: "/producto/listar"
+        dataType: "json",
+        success: function(resultado){
+
+        }
+    })
+}
+
+
 function listarCateProv(idcate, idprov){
     $.ajax({
     type: "GET",
