@@ -30,7 +30,7 @@ public class LoginController {
         UsuarioSecurityDto securityDto =
                 (UsuarioSecurityDto) userDetails;
         session.setAttribute("nomusuario",
-                securityDto.getEmail());
+                securityDto.getIdusuario());
         return "auth/home";
     }
 

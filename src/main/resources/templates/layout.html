@@ -30,14 +30,14 @@
                         Mantenimiento
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/product}">
+                        <li><a class="dropdown-item" th:href="@{/producto}">
                             Producto</a></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex" role="search" >
-                <button class="btn btn-success" >Cerrar Sesión</button>
+            <form class="d-flex" role="search" th:action="@{/logout}" >
+                <button type="submit" class="btn btn-success" >Cerrar Sesión</button>
             </form>
         </div>
     </div>
