@@ -19,7 +19,7 @@ public class SeguridadController {
 
     @GetMapping("/usuario/registro")
     public String frmUsuario(Model model){
-        model.addAttribute("listausuario",
+        model.addAttribute("listausuarios",
                 iUsuarioService.listarUsuario());
         return "seguridad/frmusuario";
     }
