@@ -37,3 +37,49 @@ $(document).on("click", ".btnactualizar", function(){
     })
 
 })
+
+$(document).on("click", "#btnguardar", function(){
+    $.ajax({
+        type: "POST",
+        url: "/seguridad/usuario",
+        contentType: "application/json",
+        data: JSON.stringify({
+            idusuario: $("#hddidusuario").val(),
+            nombres: $("#txtnombre").val(),
+            apellidos: $("#txtapellido").val(),
+            email: $("#txtemail").val(),
+            activo: $("#cbactivo").prop("checked"),
+            nomusuario: $("#txtusuario").val()
+        }),
+        success: function(resultado){
+            if(resultado.resultado){
+                listarUsuarios()
+            }
+            alert(resultado.mensaje)
+        }
+    });
+    $("#modalNuevo").modal("hide");
+})
+
+function listarUsuarios(){
+    $.ajax({
+        type: "GET",
+        url: "/seguridad/usuario",
+        dataType: "json",
+        success: function(resultado){
+            $("#tblusuarios > tbody").html("");
+            $.each(resultado, function(index, value){
+                $("#tblusuarios > tbody").append("<tr>"+
+                `<td>${value.idusuario}</td>`+
+                `<td>${value.nombres}</td>`+
+                `<td>${value.apellidos}</td>`+
+                `<td>${value.email}</td>`+
+                `<td>${value.activo}</td>`+
+                `<td><button type="button" class="btn btn-info btnactualizar" `+
+                ` data-idusuario="${value.idusuario}">Actualizar`+
+                `</button></td></tr>`)
+
+            })
+        }
+    })
+}
